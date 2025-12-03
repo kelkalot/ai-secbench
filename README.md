@@ -25,18 +25,18 @@ AI-SecBench evaluates AI models on security-adjacent reasoning tasks including c
 
 ```bash
 # Basic installation
-pip install ai-secbench
+pip install git+https://github.com/kelkalot/ai-secbench.git
 
 # With specific provider
-pip install ai-secbench[anthropic]
-pip install ai-secbench[openai]
-pip install ai-secbench[huggingface]
+pip install git+https://github.com/kelkalot/ai-secbench.git[anthropic]
+pip install git+https://github.com/kelkalot/ai-secbench.git[openai]
+pip install git+https://github.com/kelkalot/ai-secbench.git[huggingface]
 
 # All providers
-pip install ai-secbench[all]
+pip install git+https://github.com/kelkalot/ai-secbench.git[all]
 
 # Development
-pip install ai-secbench[dev]
+pip install git+https://github.com/kelkalot/ai-secbench.git[dev]
 ```
 
 ## Quick Start
