@@ -475,21 +475,43 @@ Respond with a JSON object:
             if json_match:
                 parsed = json.loads(json_match.group(1))
             else:
-                parsed = json.loads(response)
+                # Try to find JSON object in response
+                json_start = response.find('{')
+                json_end = response.rfind('}')
+                if json_start != -1 and json_end != -1:
+                    parsed = json.loads(response[json_start:json_end + 1])
+                else:
+                    parsed = json.loads(response)
             
             result = {}
             for key in rubric:
                 if key in parsed:
                     item = parsed[key]
-                    score = float(item.get("score", 0))
-                    feedback = item.get("feedback", "")
+                    # Handle both dict format and simple score format
+                    if isinstance(item, dict):
+                        score = float(item.get("score", 0))
+                        feedback = str(item.get("feedback", ""))
+                    elif isinstance(item, (int, float)):
+                        score = float(item)
+                        feedback = ""
+                    elif isinstance(item, str):
+                        # Try to extract number from string
+                        try:
+                            score = float(item)
+                            feedback = ""
+                        except ValueError:
+                            score = 0.0
+                            feedback = item
+                    else:
+                        score = 0.0
+                        feedback = str(item)
                     result[key] = (score, feedback)
                 else:
                     result[key] = (0.0, "Not evaluated")
             
             return result
             
-        except (json.JSONDecodeError, ValueError, KeyError) as e:
+        except (json.JSONDecodeError, ValueError, KeyError, TypeError) as e:
             return {"parse_error": (0.0, f"Failed to parse judge response: {str(e)}")}
     
     async def evaluate(
