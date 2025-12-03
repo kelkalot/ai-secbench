@@ -2,6 +2,8 @@
 
 **Security-Focused AI Reasoning Benchmark**
 
+Contributors: Michael A. Riegler
+
 AI-SecBench evaluates AI models on security-adjacent reasoning tasks including cipher analysis, steganographic detection, and adversarial robustness. Unlike traditional benchmarks that focus solely on correctness, AI-SecBench measures multiple dimensions:
 
 - **Correctness**: Did the model get the right answer?
