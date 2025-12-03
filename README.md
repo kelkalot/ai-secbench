@@ -280,4 +280,4 @@ MIT License - see LICENSE file.
 
 Inspired by:
 - [simpleaudit](https://github.com/kelkalot/simpleaudit) - LLM safety auditing patterns
-- Oxford security research feedback on cipher verification
+- Online discussions (https://www.linkedin.com/posts/michael-alexander-riegler-4719157a_ai-security-llms-activity-7393211726466396160-yQvs?utm_source=share&utm_medium=member_desktop&rcm=ACoAABDdgVUBJ1O0ledD8r94910EP1LeUAAWAo8) and the Norwegian Armed Forces (https://www.forsvaret.no)
