@@ -1,0 +1,92 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ai-secbench"
+version = "0.1.0"
+description = "Security-focused AI reasoning benchmark for evaluating cipher analysis, steganography detection, and adversarial robustness"
+readme = "README.md"
+license = {text = "MIT"}
+authors = [
+    {name = "AI-SecBench Team"}
+]
+keywords = [
+    "ai",
+    "benchmark",
+    "security",
+    "llm",
+    "evaluation",
+    "cipher",
+    "steganography",
+    "adversarial",
+    "prompt-injection",
+]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+    "Topic :: Security",
+]
+requires-python = ">=3.9"
+dependencies = []
+
+[project.optional-dependencies]
+anthropic = ["anthropic>=0.18.0"]
+openai = ["openai>=1.0.0"]
+huggingface = ["huggingface_hub>=0.20.0"]
+local = ["transformers>=4.36.0", "torch>=2.0.0"]
+all = [
+    "anthropic>=0.18.0",
+    "openai>=1.0.0",
+    "huggingface_hub>=0.20.0",
+]
+dev = [
+    "pytest>=7.0.0",
+    "pytest-asyncio>=0.21.0",
+    "black>=23.0.0",
+    "ruff>=0.1.0",
+    "mypy>=1.0.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/kelkalot/ai-secbench"
+Documentation = "https://github.com/kelkalot/ai-secbench#readme"
+Repository = "https://github.com/kelkalot/ai-secbench"
+Issues = "https://github.com/kelkalot/ai-secbench/issues"
+
+[project.scripts]
+ai-secbench = "ai_secbench.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["ai_secbench*"]
+
+[tool.setuptools.package-data]
+ai_secbench = ["scenarios/data/*.json", "official_sets/*.json"]
+
+[tool.black]
+line-length = 100
+target-version = ["py39", "py310", "py311", "py312"]
+
+[tool.ruff]
+line-length = 100
+select = ["E", "F", "I", "W"]
+ignore = ["E501"]
+
+[tool.mypy]
+python_version = "3.9"
+warn_return_any = true
+warn_unused_configs = true
+ignore_missing_imports = true
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]
