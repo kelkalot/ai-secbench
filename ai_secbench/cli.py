@@ -8,6 +8,7 @@ import os
 from ai_secbench import (
     BenchmarkRunner,
     BenchmarkConfig,
+    TurnMode,
     run_benchmark,
 )
 from ai_secbench.scenarios import load_scenario_pack, list_scenario_packs
@@ -72,7 +73,7 @@ def main() -> None:
         master_seed=args.master_seed,
         use_official_set=args.use_official_set,
         official_set_version=args.official_set_version,
-        turn_mode=args.turn_mode,
+        turn_mode=TurnMode(args.turn_mode),
         max_turns=args.max_turns,
         require_structured_output=args.require_structured_output,
         verbose=args.verbose,
