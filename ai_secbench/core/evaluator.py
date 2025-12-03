@@ -16,9 +16,19 @@ def normalize_text(s: str, preserve_unicode: bool = True) -> str:
     Normalize text for comparison.
     
     Args:
-        s: Input string
+        s: Input string (or value that can be converted to string)
         preserve_unicode: If True, keeps Norwegian chars (æøå); if False, converts to ASCII
     """
+    # Ensure s is a string
+    if s is None:
+        return ""
+    if isinstance(s, dict):
+        s = str(s)
+    elif isinstance(s, list):
+        s = " ".join(str(x) for x in s)
+    elif not isinstance(s, str):
+        s = str(s)
+    
     s = s.lower().strip()
     s = re.sub(r"\s+", " ", s)  # Collapse whitespace
     
@@ -241,7 +251,7 @@ class Evaluator:
         expected = challenge.solution_bundle.get("plaintext", "")
         if not expected:
             # Try other common keys
-            for key in ["answer", "solution", "hidden_message"]:
+            for key in ["answer", "solution", "hidden_message", "correct_answer"]:
                 if key in challenge.solution_bundle:
                     expected = challenge.solution_bundle[key]
                     break
@@ -249,7 +259,20 @@ class Evaluator:
         if not expected:
             return 0.0, "No expected answer in solution bundle"
         
+        # Ensure expected is a string
+        if isinstance(expected, dict):
+            # Convert dict to string representation
+            expected = str(expected)
+        elif isinstance(expected, list):
+            expected = " ".join(str(x) for x in expected)
+        else:
+            expected = str(expected)
+        
         actual = response.answer
+        
+        # Ensure actual is a string
+        if not isinstance(actual, str):
+            actual = str(actual) if actual else ""
         
         # Exact match (normalized)
         expected_norm = normalize_text(expected, self.preserve_unicode)
