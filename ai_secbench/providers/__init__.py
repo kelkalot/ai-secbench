@@ -17,6 +17,7 @@ from ai_secbench.providers.huggingface import (
     LocalHuggingFaceProvider,
     create_huggingface_provider,
 )
+from ai_secbench.providers.xai import XAIProvider, create_xai_provider
 
 
 # Registry of available providers
@@ -28,6 +29,7 @@ PROVIDERS: Dict[str, type] = {
     "huggingface": HuggingFaceProvider,
     "hf": HuggingFaceProvider,  # Alias
     "huggingface_local": LocalHuggingFaceProvider,
+    "xai": XAIProvider,
 }
 
 # Default models for each provider
@@ -35,12 +37,13 @@ DEFAULT_MODELS: Dict[str, str] = {
     "anthropic": "claude-3-5-sonnet-20241022",
     "openai": "gpt-4o",
     "huggingface": "meta-llama/Llama-3.1-8B-Instruct",
+    "xai": "grok-2-1212",
 }
 
 
 def list_providers() -> List[str]:
     """List available provider names."""
-    return ["anthropic", "openai", "huggingface", "huggingface_local"]
+    return ["anthropic", "openai", "huggingface", "huggingface_local", "xai"]
 
 
 def get_provider(
@@ -98,9 +101,11 @@ __all__ = [
     "OpenAIProvider",
     "HuggingFaceProvider",
     "LocalHuggingFaceProvider",
+    "XAIProvider",
     "get_provider",
     "list_providers",
     "create_anthropic_provider",
     "create_openai_provider",
     "create_huggingface_provider",
+    "create_xai_provider",
 ]
