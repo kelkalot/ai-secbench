@@ -385,7 +385,10 @@ class Evaluator:
         prompt = self._build_judge_prompt(challenge, response, rubric)
         
         try:
-            judge_response = await self.judge_provider.complete(prompt)
+            judge_response = await self.judge_provider.complete(
+                messages=[{"role": "user", "content": prompt}],
+                return_usage=False,
+            )
             return self._parse_judge_response(judge_response, rubric)
         except Exception as e:
             return {"error": (0.0, f"Judge evaluation failed: {str(e)}")}
