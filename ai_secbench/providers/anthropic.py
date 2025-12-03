@@ -53,6 +53,10 @@ class AnthropicProvider(BaseProvider):
     ) -> Union[Tuple[str, Dict[str, int]], str]:
         """Send completion request to Claude."""
         
+        # Defensive: handle case where a string is passed instead of messages array
+        if isinstance(messages, str):
+            messages = [{"role": "user", "content": messages}]
+        
         # Extract system message if present
         system_content = None
         chat_messages = []

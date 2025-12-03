@@ -58,6 +58,10 @@ class OpenAIProvider(BaseProvider):
     ) -> Union[Tuple[str, Dict[str, int]], str]:
         """Send completion request to OpenAI."""
         
+        # Defensive: handle case where a string is passed instead of messages array
+        if isinstance(messages, str):
+            messages = [{"role": "user", "content": messages}]
+        
         # Build request
         request_kwargs = {
             "model": self.config.model,
