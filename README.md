@@ -18,7 +18,7 @@ AI-SecBench evaluates AI models on security-adjacent reasoning tasks including c
 - 🌍 **Multi-language support** - English and Norwegian (extensible)
 - 🔄 **Reproducible** - Seeded generation + versioned official sets
 - 💰 **Cost tracking** - Estimate API costs per run
-- 🔌 **Multi-provider** - Anthropic, OpenAI, HuggingFace
+- 🔌 **Multi-provider** - Anthropic, OpenAI, HuggingFace, xAI (Grok)
 - 📊 **LLM-as-Judge** - Rubric-based reasoning evaluation
 
 ## Installation
@@ -31,6 +31,7 @@ pip install git+https://github.com/kelkalot/ai-secbench.git
 pip install git+https://github.com/kelkalot/ai-secbench.git[anthropic]
 pip install git+https://github.com/kelkalot/ai-secbench.git[openai]
 pip install git+https://github.com/kelkalot/ai-secbench.git[huggingface]
+pip install git+https://github.com/kelkalot/ai-secbench.git[xai]
 
 # All providers
 pip install git+https://github.com/kelkalot/ai-secbench.git[all]
@@ -75,6 +76,12 @@ config = BenchmarkConfig(
 
 runner = BenchmarkRunner(config, challenge_set=challenges)
 results = runner.run_sync()
+```
+
+### Command Line
+
+```bash
+ai-secbench --provider xai --model grok-2-1212 --n-per-type 2 --language english --output results.json
 ```
 
 ### Generate Challenges Only
@@ -260,6 +267,7 @@ WORD_BANKS["german"] = [
 ANTHROPIC_API_KEY=sk-ant-...
 OPENAI_API_KEY=sk-...
 HF_TOKEN=hf_...
+XAI_API_KEY=xaikey_...
 ```
 
 ## Contributing

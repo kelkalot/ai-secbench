@@ -6,6 +6,7 @@ import asyncio
 import time
 import uuid
 from datetime import datetime
+import random
 from typing import List, Optional, Dict, Any
 import json
 
@@ -111,19 +112,21 @@ class BenchmarkRunner:
         """Generate a fresh challenge set."""
         from ai_secbench.challenges import get_challenge_generator
         
+        # Derive per-type seeds for reproducibility without forcing identical streams
+        seeded_rng = random.Random(self.config.master_seed) if self.config.master_seed is not None else None
         challenges = []
         
         for challenge_type in self.config.challenge_types:
             generator = get_challenge_generator(challenge_type)
+            type_seed = seeded_rng.randint(0, 1_000_000_000) if seeded_rng else None
             
-            for i in range(self.config.n_challenges_per_type):
-                new_challenges = generator.generate(
-                    n=1,
-                    language=self.config.language,
-                    seed=self.config.master_seed,
-                    index_offset=i,
-                )
-                challenges.extend(new_challenges)
+            new_challenges = generator.generate(
+                n=self.config.n_challenges_per_type,
+                language=self.config.language,
+                seed=type_seed,
+                index_offset=0,
+            )
+            challenges.extend(new_challenges)
         
         return ChallengeSet(
             challenges=challenges,
