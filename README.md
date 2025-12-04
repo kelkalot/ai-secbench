@@ -2,7 +2,9 @@
 
 **Security-Focused AI Reasoning Benchmark**
 
-Contributors: Michael A. Riegler, Simula Resaerch Laboratory, michael@simula.no
+Contributors: \
+Michael A. Riegler, Simula Resaerch Laboratory, michael@simula.no \
+Julia Mykhailiuk, DNV
 
 AI-SecBench evaluates AI models on security-adjacent reasoning tasks including cipher analysis, steganographic detection, and adversarial robustness. Unlike traditional benchmarks that focus solely on correctness, AI-SecBench measures multiple dimensions:
 
