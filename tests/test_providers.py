@@ -27,7 +27,7 @@ def _is_installed(module_name: str) -> bool:
 def test_registry_contains_expected_providers():
     providers = list_providers()
     for expected in ["anthropic", "openai", "huggingface", "huggingface_local", "xai", "google"]:
-        assert expected in providers
+        assert expected in providers, f"Provider '{expected}' missing from registry. Seen: {providers}"
 
 
 @pytest.mark.parametrize(
@@ -43,7 +43,9 @@ def test_registry_contains_expected_providers():
 )
 def test_get_provider_returns_correct_class(provider_name, expected_cls_name):
     provider = get_provider(provider_name, model="dummy-model", api_key="DUMMY")
-    assert provider.__class__.__name__ == expected_cls_name
+    assert provider.__class__.__name__ == expected_cls_name, (
+        f"Expected {expected_cls_name}, got {provider.__class__.__name__}"
+    )
     # count_tokens should be callable without network
     assert isinstance(provider.count_tokens("hello world"), int)
 
@@ -70,5 +72,5 @@ def test_complete_raises_without_api_key(monkeypatch, provider_name, model, env_
     async def _call():
         await provider.complete([{"role": "user", "content": "ping"}])
     
-    with pytest.raises(ValueError):
+    with pytest.raises(ValueError, match="API key"):
         asyncio.run(_call())
