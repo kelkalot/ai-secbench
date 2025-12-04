@@ -21,7 +21,7 @@ AI-SecBench evaluates AI models on security-adjacent reasoning tasks including c
 - 🌍 **Multi-language support** - English and Norwegian (extensible)
 - 🔄 **Reproducible** - Seeded generation + versioned official sets
 - 💰 **Cost tracking** - Estimate API costs per run
-- 🔌 **Multi-provider** - Anthropic, OpenAI, HuggingFace, xAI (Grok)
+- 🔌 **Multi-provider** - Anthropic, OpenAI, HuggingFace, xAI (Grok), Google Gemini
 - 📊 **LLM-as-Judge** - Rubric-based reasoning evaluation
 
 ## Installation
@@ -35,6 +35,7 @@ pip install git+https://github.com/kelkalot/ai-secbench.git[anthropic]
 pip install git+https://github.com/kelkalot/ai-secbench.git[openai]
 pip install git+https://github.com/kelkalot/ai-secbench.git[huggingface]
 pip install git+https://github.com/kelkalot/ai-secbench.git[xai]
+pip install git+https://github.com/kelkalot/ai-secbench.git[google]
 
 # All providers
 pip install git+https://github.com/kelkalot/ai-secbench.git[all]
@@ -85,6 +86,8 @@ results = runner.run_sync()
 
 ```bash
 ai-secbench --provider xai --model grok-2-1212 --n-per-type 2 --language english --output results.json
+# Google AI Studio (Gemini)
+ai-secbench --provider google --model gemini-1.5-pro-latest --n-per-type 2 --language english --output results.json
 ```
 
 ### Generate Challenges Only
@@ -271,6 +274,7 @@ ANTHROPIC_API_KEY=sk-ant-...
 OPENAI_API_KEY=sk-...
 HF_TOKEN=hf_...
 XAI_API_KEY=xaikey_...
+GOOGLE_API_KEY=AIza...
 ```
 
 ## Contributing

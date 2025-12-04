@@ -18,6 +18,7 @@ from ai_secbench.providers.huggingface import (
     create_huggingface_provider,
 )
 from ai_secbench.providers.xai import XAIProvider, create_xai_provider
+from ai_secbench.providers.google import GoogleAIProvider, create_google_provider
 
 
 # Registry of available providers
@@ -30,6 +31,8 @@ PROVIDERS: Dict[str, type] = {
     "hf": HuggingFaceProvider,  # Alias
     "huggingface_local": LocalHuggingFaceProvider,
     "xai": XAIProvider,
+    "google": GoogleAIProvider,
+    "gemini": GoogleAIProvider,  # Alias
 }
 
 # Default models for each provider
@@ -38,12 +41,13 @@ DEFAULT_MODELS: Dict[str, str] = {
     "openai": "gpt-4o",
     "huggingface": "meta-llama/Llama-3.1-8B-Instruct",
     "xai": "grok-2-1212",
+    "google": "gemini-1.5-pro-latest",
 }
 
 
 def list_providers() -> List[str]:
     """List available provider names."""
-    return ["anthropic", "openai", "huggingface", "huggingface_local", "xai"]
+    return ["anthropic", "openai", "huggingface", "huggingface_local", "xai", "google"]
 
 
 def get_provider(
@@ -102,10 +106,12 @@ __all__ = [
     "HuggingFaceProvider",
     "LocalHuggingFaceProvider",
     "XAIProvider",
+    "GoogleAIProvider",
     "get_provider",
     "list_providers",
     "create_anthropic_provider",
     "create_openai_provider",
     "create_huggingface_provider",
     "create_xai_provider",
+    "create_google_provider",
 ]
