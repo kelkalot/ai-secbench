@@ -98,7 +98,7 @@ class XAIProvider(BaseProvider):
 
 
 def create_xai_provider(
-    model: str = "grok-2-1212",
+    model: str = "grok-4-1-fast",
     api_key: Optional[str] = None,
     base_url: Optional[str] = None,
     **kwargs,

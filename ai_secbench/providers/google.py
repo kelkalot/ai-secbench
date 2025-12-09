@@ -115,7 +115,7 @@ class GoogleAIProvider(BaseProvider):
 
 
 def create_google_provider(
-    model: str = "gemini-1.5-pro-latest",
+    model: str = "gemini-flash-latest",
     api_key: Optional[str] = None,
     base_url: Optional[str] = None,
     **kwargs,
