@@ -43,6 +43,7 @@ anthropic = ["anthropic>=0.18.0"]
 openai = ["openai>=1.0.0"]
 huggingface = ["huggingface_hub>=0.20.0"]
 xai = ["httpx>=0.26.0"]
+google = ["httpx>=0.26.0"]
 local = ["transformers>=4.36.0", "torch>=2.0.0"]
 all = [
     "anthropic>=0.18.0",
